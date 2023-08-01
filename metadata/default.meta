@@ -28,6 +28,15 @@ export = system
 export = system
 
 
+### VIEWS
+[views/requirements]
+owner = nobody
+
+### INDEXES 
+[indexes/custom_search_index_data_idx]
+owner = nobody
+
+
 ### VIEWSTATES: even normal users should be able to create shared viewstates
 
 [viewstates]

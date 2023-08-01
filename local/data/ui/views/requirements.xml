@@ -1,0 +1,42 @@
+<dashboard version="1.1" theme="light" isDashboard="false" hideEdit="true">
+  <label>READ ME</label>
+  <row>
+    <panel>
+      <html>
+    <h3>Required Capability</h3>
+    <code>
+edit_log_alert_event    = enabled
+    </code>
+    <h3>Configuration File</h3>
+    <p>commands.conf</p>
+    <pre>
+[indexdata]
+filename = index_data.py
+passauth = true
+python.version = python3
+is_risky = false 
+    </pre>
+    
+    <h3>Dependencies</h3>
+    <ul>
+      <li>Splunk Enterprise SDK for Python</li>
+      <li>splunk (old library)</li>
+    </ul>
+    <h3>Required Variables</h3>
+    <p> You can find the script in <code>APP_HOME/bin/</code> and updated the following variables as required under <code>__init__</code> function definition.</p>
+<pre>
+self.s_host="localhost" 
+self.s_port="8089"
+self.index="custom_search_index_data_idx"
+self.sourcetype="_json"
+</pre>
+    <h3>Example SPL</h3>
+    <code>
+| makeresults 
+| eval test="value" 
+| indexdata
+    </code>
+  </html>
+    </panel>
+  </row>
+</dashboard>
