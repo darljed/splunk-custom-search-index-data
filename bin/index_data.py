@@ -5,6 +5,7 @@ import base64
 
 from base64 import b64encode
 import json
+import time
 import sys
 import os
 import splunklib.client as client
@@ -16,7 +17,7 @@ class Actions:
         self.s_host="localhost"
         self.s_port="8089"
         self.index="custom_search_index_data_idx"
-        self.sourcetype="_json"
+        self.sourcetype="custom_json"
 
     def splunk_connect(self,sessionKey):
         # create splunk service connection over http
@@ -37,7 +38,7 @@ class Actions:
         sourcetype=sourcetype
 
         try:
-            target.submit(str(data), sourcetype=sourcetype) # triggers submission and indexing of data
+            target.submit(str(json.dumps(dict(data))), sourcetype=sourcetype) # triggers submission and indexing of data
             return True
         except Exception as error:
             return f'Event not indexed. {error}'
@@ -51,6 +52,7 @@ class Actions:
                 
                 # you can modify and add more fields here that will be added to the data when indexed
                 result['Greetings'] = "Hello World!"
+                result['timestamp'] = time.time()
                 # save data to index / index data
                 post = self.splunk_push(self.index,self.sourcetype,self.token,result)
                 # all changes to 'result' dict after this will not be indexed

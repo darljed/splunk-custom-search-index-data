@@ -11,6 +11,9 @@ export = system
 
 
 ### PROPS
+[props/custom_json]
+owner = nobody
+
 
 [props]
 export = system
